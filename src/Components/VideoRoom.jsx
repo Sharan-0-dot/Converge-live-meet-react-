@@ -26,8 +26,8 @@ function VideoRoom() {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const userName = storedUser.username ? storedUser.username : "userName" + userID;
 
-    const appID = Number(import.meta.env.VITE_APP_ID); // your appID
-    const serverSecret = import.meta.env.VITE_SERVER_SECRET; // ❌ for testing only!
+    const appID = Number(import.meta.env.VITE_APP_ID);
+    const serverSecret = import.meta.env.VITE_SERVER_SECRET;
 
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
       appID,
@@ -75,12 +75,10 @@ function VideoRoom() {
   }, []);
 
    return (
-    // <div className="flex justify-center items-center h-screen">
     <div
       ref={rootRef}
       className="w-[100vw] h-[100vh]"
     />
-    // </div>
   );
 }
 
