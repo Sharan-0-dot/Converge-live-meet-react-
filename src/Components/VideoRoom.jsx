@@ -1,17 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-import { useNavigate } from "react-router-dom";
 
 function VideoRoom() {
   const rootRef = useRef(null);
 
-
   useEffect(() => {
+    if (!rootRef.current) return;
 
     const getUrlParams = (url) => {
-      let urlStr = url.split("?")[1];
-      const urlSearchParams = new URLSearchParams(urlStr);
-      return Object.fromEntries(urlSearchParams.entries());
+      if (!url.includes("?")) return {};
+      const urlStr = url.split("?")[1];
+      return Object.fromEntries(new URLSearchParams(urlStr).entries());
     };
 
     const roomID =
@@ -19,7 +18,7 @@ function VideoRoom() {
       (Math.floor(Math.random() * 10000) + "");
     const userID = Math.floor(Math.random() * 10000) + "";
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    const userName = storedUser.username ? storedUser.username : "userName" + userID;
+    const userName = storedUser?.username || "userName" + userID;
 
     const appID = Number(import.meta.env.VITE_APP_ID);
     const serverSecret = import.meta.env.VITE_SERVER_SECRET;
@@ -63,14 +62,9 @@ function VideoRoom() {
       layout: "Auto",
       showLayoutButton: false,
     });
-  }, []);
+  }, [rootRef.current]);
 
-   return (
-    <div
-      ref={rootRef}
-      className="w-[100vw] h-[100vh]"
-    />
-  );
+  return <div ref={rootRef} className="w-[100vw] h-[100vh]" />;
 }
 
 export default VideoRoom;
