@@ -8,11 +8,6 @@ function VideoRoom() {
 
   useEffect(() => {
 
-    if (!localStorage.getItem("reloaded")) {
-      localStorage.setItem("reloaded", "true");
-      window.location.reload();
-    }
-
     const getUrlParams = (url) => {
       let urlStr = url.split("?")[1];
       const urlSearchParams = new URLSearchParams(urlStr);
@@ -68,10 +63,6 @@ function VideoRoom() {
       layout: "Auto",
       showLayoutButton: false,
     });
-
-    return () => {
-      localStorage.removeItem("reloaded");
-    };
   }, []);
 
    return (
