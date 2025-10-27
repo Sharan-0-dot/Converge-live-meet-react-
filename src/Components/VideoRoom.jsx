@@ -15,13 +15,14 @@ function VideoRoom() {
 
     const roomID =
       getUrlParams(window.location.href)["roomID"] ||
-      (Math.floor(Math.random() * 10000) + "");
-    const userID = Math.floor(Math.random() * 10000) + "";
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    const userName = storedUser?.username || "userName" + userID;
+      String(Math.floor(Math.random() * 10000));
 
-    const appID = Number("702529415");
-    const serverSecret = "24d711519b94775e350a9ccf84ae49a2";
+    const userID = String(Math.floor(Math.random() * 10000));
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const userName = storedUser?.username || "user_" + userID;
+
+    const appID = 100190354;
+    const serverSecret = "fb2d0107a061fb878a99a214d6a44f8d";
 
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
       appID,
@@ -50,22 +51,22 @@ function VideoRoom() {
       scenario: {
         mode: ZegoUIKitPrebuilt.VideoConference,
       },
-      turnOnMicrophoneWhenJoining: false,
-      turnOnCameraWhenJoining: false,
+
+      turnOnMicrophoneWhenJoining: true,
+      turnOnCameraWhenJoining: true,
       showMyCameraToggleButton: true,
       showMyMicrophoneToggleButton: true,
       showAudioVideoSettingsButton: true,
       showScreenSharingButton: true,
       showTextChat: true,
       showUserList: true,
-      maxUsers: 10,
-      layout: "Auto",
-      showLayoutButton: false,
+      maxUsers: 50,
+      layout: "Grid",
+      showLayoutButton: true,
     });
-  }, [rootRef.current]);
+  }, []);
 
   return <div ref={rootRef} className="w-[100vw] h-[100vh]" />;
 }
-
 
 export default VideoRoom;
