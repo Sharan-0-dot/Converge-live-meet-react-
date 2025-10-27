@@ -20,8 +20,8 @@ function VideoRoom() {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const userName = storedUser?.username || "userName" + userID;
 
-    const appID = Number(import.meta.env.VITE_APP_ID);
-    const serverSecret = import.meta.env.VITE_SERVER_SECRET;
+    const appID = Number("702529415");
+    const serverSecret = "24d711519b94775e350a9ccf84ae49a2";
 
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
       appID,
